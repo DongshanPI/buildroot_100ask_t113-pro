@@ -1,0 +1,15 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-2022.git
+[submodule "br2t113pro"]
+	path = br2t113pro
+	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-external-t113-pro.git
+[submodule "br2awol"]
+	path = br2awol
+	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-external-awol.git
+[submodule "br2qt5"]
+	path = br2qt5
+	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-external-qt5.git
+[submodule "br2lvgl"]
+	path = br2lvgl
+	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-external-lvgl.git
