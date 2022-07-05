@@ -13,16 +13,16 @@ jobs:
         config: [100ask_t113-pro_sdcard_core_defconfig, 100ask_t113-pro_sdcard-lvgl-desktop_defconfig ]
     steps:
       - uses: actions/checkout@v2
-	  
+      
       - run: cd buildroot_100ask_t113-pro
-	  
+      
       - name: Install buildroot dependencies
         run: sudo apt-get install -y which sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python ncurses5  bazaar cvs git mercurial rsync scp subversion android-tools-mkbootimg
         
       - name: Clone submodules
         run: |
             git submodule update --init --recursive 
-			      git submodule update --recursive --remote
+	    git submodule update --recursive --remote
 
       - name: Configure Buildroot
         run: make -C buildroot  BR2_EXTERNAL="../br2t113pro/ ../br2lvgl/" O=./output  ${{ matrix.config }}
