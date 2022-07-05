@@ -7,38 +7,69 @@
 * 运行环境配置： 此系统基于ubuntu18.04进行验证，需要安装如下依赖。
 
 ```bash
- sudo apt-get install -y which sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python ncurses5  bazaar cvs git mercurial rsync scp subversion android-tools-mkbootimg
+book@100ask:~$  sudo apt-get install -y which sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python ncurses5  bazaar cvs git mercurial rsync scp subversion android-tools-mkbootimg
 ```
 
 * 安装完成后，执行如下命令进行开始编译操作。
-  * 如下示例编译的为 SD Card系统镜像，如果需要编译 spi nand flash镜像，请修改配置文件为 `100ask_t113-pro_spinand_core_defconfig`
+
+### 编译TF卡最小系统镜像
+
+* 如下示例编译的为 SD Card系统镜像，如果需要编译 spi nand flash镜像，请修改配置文件为 `100ask_t113-pro_spinand_core_defconfig`
 
 
 ```bash
-git clone  https://github.com/DongshanPI/buildroot-100ask_t113-pro
-cd buildroot-100ask_t113-pro/
-git submodule update --init --recursive
-git submodule update --recursive --remote
-cd  buildroot/
-make  BR2_EXTERNAL="../br2t113pro ../br2lvgl "  100ask_t113-pro_sdcard_core_defconfig
+book@100ask:~$ git clone  https://github.com/DongshanPI/buildroot-100ask_t113-pro
+book@100ask:~$ cd buildroot-100ask_t113-pro/
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
+book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make  BR2_EXTERNAL="../br2t113pro ../br2lvgl "  100ask_t113-pro_sdcard_core_defconfig
 ```
 
 * 对于国内无法访问github的同学，可以使用如下命令。
 
 ```bash
-git clone  https://gitee.com/weidongshan/buildroot-100ask_t113-pro
-cd buildroot-100ask_t113-pro/
-git submodule update --init --recursive
-git submodule update --recursive --remote
-cd  buildroot/
-make  BR2_DL_DIR=../Download  BR2_EXTERNAL="../br2t113pro  ../br2lvgl"  100ask_t113-pro_sdcard_core_defconfig
+book@100ask:~$ git clone  https://gitee.com/weidongshan/buildroot-100ask_t113-pro
+book@100ask:~$ cd buildroot-100ask_t113-pro/
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
+book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make   BR2_EXTERNAL="../br2t113pro  ../br2lvgl"  100ask_t113-pro_sdcard_core_defconfig
 ```
 
 编译完成后会在 output/images目录下输出 sdcard.img文件，将文件拷贝到Windows系统下使用 wind32diskimage烧写，或者使用dd if 烧录到tf卡内，
 
 之后插到开发板上，即可启动，注意这套系统默认使用的是 PB6 PB7 也就是UART3为默认的串口。
 
-
-
 如果您编译的是 SPI NAND FLASH镜像，请使用 全志官方的  AllwinnertechPhoeniSuit 进行烧写。
+
+> 详细步骤请先参考 https://dongshanpi.com/DongshanNezhaSTU/03-QuickStart/
+
+
+
+### 编译自带lvgl桌面最小系统镜像
+
+* 如下示例编译的为包含LVGL桌面的 SD Card系统镜像，编译完成后  烧写进TF卡内，插入开发板启动即可看到 LVGL桌面。
+
+```bash
+book@100ask:~$ git clone  https://github.com/DongshanPI/buildroot-100ask_t113-pro
+book@100ask:~$ cd buildroot-100ask_t113-pro/
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
+book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
+book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make  BR2_EXTERNAL="../br2t113pro ../br2lvgl "  100ask_t113-pro_sdcard-lvgl-desktop_defconfig
+```
+
+
+
+
+
+
+
+
+
+
 
