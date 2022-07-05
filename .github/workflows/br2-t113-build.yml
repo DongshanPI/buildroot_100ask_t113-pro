@@ -21,8 +21,8 @@ jobs:
         
       - name: Clone submodules
         run: |
-            git submodule update --init --recursive 
-	    git submodule update --recursive --remote
+            git submodule update --init --recursive
+            git submodule update --recursive --remote
 
       - name: Configure Buildroot
         run: make -C buildroot  BR2_EXTERNAL="../br2t113pro/ ../br2lvgl/" O=./output  ${{ matrix.config }}
