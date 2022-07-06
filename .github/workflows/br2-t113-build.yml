@@ -1,0 +1,53 @@
+name: Auto Build buildroot_100ask_t113-pro system.
+
+on:
+  push:
+    tags:
+       - '*'
+       
+jobs:
+  build-all:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        config: [100ask_t113-pro_sdcard_core_defconfig,100ask_t113-pro_sdcard-lvgl-desktop_defconfig ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: buildroot_100ask_t113-pro
+          
+      - name: Install buildroot dependencies
+        run: sudo apt-get install -y which sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python ncurses5  bazaar cvs git mercurial rsync scp subversion android-tools-mkbootimg
+
+      - run: cd buildroot_100ask_t113-pro
+	  
+      - name: Clone Submodules
+        run: git submodule update --init --recursive && git submodule update --recursive --remote
+        
+      - name: Build Buildroot
+        run: make -C buildroot  BR2_EXTERNAL="../br2t113pro ../br2lvgl" O=./output  ${{ matrix.config }}
+        
+      - name: Build toolchain
+        run: make -C buildroot  BR2_EXTERNAL="../br2t113pro ../br2lvgl" O=./output sdk        
+        
+      - name: Compress sdcard.img
+        run: gzip -9 output/images/*sdcard.img
+                 
+      - run: tar -czvf ${{ matrix.config }}.tar.gz   output/images/*         
+
+      - name: Store images
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.config }}
+          path: ${{ matrix.config }}.tar.gz
+          
+      - run: ls -la
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ${{ matrix.config }}.tar.gz
+            
+      - run: ls -la
