@@ -2,67 +2,31 @@
 
 * 运行环境，此套构建系统基于全志T113-S3 芯片，适配了buildroot 2022lts主线版本，兼容了百问网的项目课程以及相关组件，真正做到了低耦合，高可用，使用不同的buildroot external tree规格，讲不同的项目 不同的组件分别管理，来实现更容易上手 也更容易学习理解。
 
-## 使用说明
+1. [开发板硬件介绍](./docs/01-BoardIntroduction.md)
 
-* 运行环境配置： 此系统基于ubuntu18.04进行验证，需要安装如下依赖。
+2. [开发板支持的资源](./docs/02-SupportingResources.md)
 
-```bash
-book@100ask:~$  sudo apt-get install -y which sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python ncurses5  bazaar cvs git mercurial rsync scp subversion android-tools-mkbootimg
-```
+3. [开发板快速上手](./docs/03-QuickStart.md)
 
-* 安装完成后，执行如下命令进行开始编译操作。
+4. [开发板配套资源](./docs/04-StudyPath.md)
 
-### 编译TF卡最小系统镜像
+5. [运行一个helloword](./docs/05-1_RunHelloword.md)
 
-* 如下示例编译的为 SD Card系统镜像，如果需要编译 spi nand flash镜像，请修改配置文件为 `100ask_t113-pro_spinand_core_defconfig`
+6. [运行一个helloword驱动程序](./docs/05-2_RunHellowordDriver.md)
 
+7. [配置开发环境](./docs/06-ConfigHostEnv.md)
 
-```bash
-book@100ask:~$ git clone  https://github.com/DongshanPI/buildroot-100ask_t113-pro
-book@100ask:~$ cd buildroot-100ask_t113-pro/
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
-book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make  BR2_EXTERNAL="../br2t113pro ../br2lvgl "  100ask_t113-pro_sdcard_core_defconfig
-```
+8. [BuIldroot-SDK最小系统开发](./docs/07-Buildroot-SDK_DevelopmentGuide.md)
 
-* 对于国内无法访问github的同学，可以使用如下命令。
+9. [Buildroot单独编译构建uboot](./docs/08-BuildBootloader.md)
 
-```bash
-book@100ask:~$ git clone  https://gitee.com/weidongshan/buildroot-100ask_t113-pro
-book@100ask:~$ cd buildroot-100ask_t113-pro/
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
-book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make   BR2_EXTERNAL="../br2t113pro  ../br2lvgl"  100ask_t113-pro_sdcard_core_defconfig
-```
+10. [BuIldroot单独构建kernel](./docs/09-BuildLinuxKernel.md)
 
-编译完成后会在 output/images目录下输出 sdcard.img文件，将文件拷贝到Windows系统下使用 wind32diskimage烧写，或者使用dd if 烧录到tf卡内，
+11. [BuIldroot单独构建Rootfs](./docs/10-BuildRootfs.md)
 
-之后插到开发板上，即可启动，注意这套系统默认使用的是 PB6 PB7 也就是UART3为默认的串口。
+12. [BuIldroot支持WIFI蓝牙组件](./docs/10-BuildRootfs.md)
 
-如果您编译的是 SPI NAND FLASH镜像，请使用 全志官方的  AllwinnertechPhoeniSuit 进行烧写。
-
-> 详细步骤请先参考 https://dongshanpi.com/DongshanNezhaSTU/03-QuickStart/
-
-
-
-### 编译自带lvgl桌面最小系统镜像
-
-* 如下示例编译的为包含LVGL桌面的 SD Card系统镜像，编译完成后  烧写进TF卡内，插入开发板启动即可看到 LVGL桌面。
-
-```bash
-book@100ask:~$ git clone  https://github.com/DongshanPI/buildroot-100ask_t113-pro
-book@100ask:~$ cd buildroot-100ask_t113-pro/
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro$ git submodule update --recursive --remote
-book@100ask:~/buildroot-100ask_t113-pro$ cd  buildroot/
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ git submodule update --init --recursive
-book@100ask:~/buildroot-100ask_t113-pro/buildroot$ make  BR2_EXTERNAL="../br2t113pro ../br2lvgl "  100ask_t113-pro_sdcard-lvgl-desktop_defconfig
-```
-
+13. [Buildroot打包流程分析](./docs/11-StartProcessAnalysis.md)
 
 
 
