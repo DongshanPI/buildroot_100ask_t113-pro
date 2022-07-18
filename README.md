@@ -7,6 +7,8 @@
 2. [开发板支持的资源](./docs/02-SupportingResources.md)
 
 3. [开发板快速上手](./docs/03-QuickStart.md)
+	3.1  [烧写更新spinandflash](./docs/03-1_FlashSystemSpiFlash.md)
+	3.2  [烧写更新TF卡](./docs/03-2_FlashSystemTFCard.md)
 
 4. [开发板配套资源](./docs/04-StudyPath.md)
 
@@ -27,7 +29,6 @@
 12. [BuIldroot支持WIFI蓝牙组件](./docs/10-BuildRootfs.md)
 
 13. [Buildroot打包流程分析](./docs/11-StartProcessAnalysis.md)
-
 
 
 
