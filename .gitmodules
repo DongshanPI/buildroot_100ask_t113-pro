@@ -7,3 +7,6 @@
 [submodule "br2t113pro"]
 	path = br2t113pro
 	url = https://e.coding.net/weidongshan/100ask_t113-pro/buildroot-external-t113-pro.git
+[submodule "br2qt5"]
+	path = br2qt5
+	url = https://e.coding.net/weidongshan/br2-external-tree/buildroot-external-qt5.git
